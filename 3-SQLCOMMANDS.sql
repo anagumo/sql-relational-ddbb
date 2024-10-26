@@ -44,12 +44,30 @@ select per.id_personaje,
 per.desc_personaje,
 fam.desc_familia
 from personajes per, familias fam
-where per.id_familia = fam.id_familia;
-
-select per.id_personaje,
-per.desc_personaje,
-fam.desc_familia
-from personajes per
-inner join familias fam on per.id_familia = fam.id_familia;*/
+where per.id_familia = fam.id_familia;*/
 
 -- rollback; because I was deleted the id.familia 1 from familias
+
+/* views 
+-- drop view vw_name
+-- create view vw_personajes as (0 rows affected) (its like an screenshot)
+create view vw_personajes as
+select per.id_personaje,
+per.desc_personaje,
+sexo.desc_sexo,
+fam.desc_familia,
+mat.desc_matrimonio,
+lug.desc_lugar desc_lugar_residencia,
+prof.desc_profesion,
+lug2.desc_lugar desc_lugar_profesion
+from personajes per
+left outer join sexos sexo on per.id_sexo = sexo.id_sexo
+left outer join familias fam on per.id_familia = fam.id_familia
+left outer join matrimonios mat on per.id_matrimonio = mat.id_matrimonio
+left outer join lugares lug on per.id_lugar_residencia = lug.id_lugar
+left outer join profesiones prof on per.id_profesion = prof.id_profesion
+left outer join lugares lug2 on per.id_lugar_profesion = lug2.id_luga
+
+select * from vw_personajes;r*/
+
+
