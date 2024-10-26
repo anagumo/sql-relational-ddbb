@@ -44,10 +44,8 @@ select per.id_personaje,
 per.desc_personaje,
 fam.desc_familia
 from personajes per, familias fam
-where per.id_familia = fam.id_familia;*/
-
--- rollback; because I was deleted the id.familia 1 from familias
-
+where per.id_familia = fam.id_familia;
+-- rollback; because I was deleted the id.familia 1 from familias*/
 /* views 
 -- drop view vw_name
 -- create view vw_personajes as (0 rows affected) (its like an screenshot)
@@ -69,5 +67,32 @@ left outer join profesiones prof on per.id_profesion = prof.id_profesion
 left outer join lugares lug2 on per.id_lugar_profesion = lug2.id_luga
 
 select * from vw_personajes;r*/
+/* intersect 
+select * from personajes a
+inner join tmp_personajes b on a.id_personaje = b.id_personaje
+and a.desc_personaje = b.desc_personaje
+and a.id_familia <=> b.id_familia
+and a.id_sexo = b.id_sexo
+and a.id_matrimonio <=> b.id_matrimonio
+and a.id_lugar_residencia <=> b.id_lugar_residencia
+and a.id_profesion <=> b.id_profesion
+and a.id_lugar_profesion <=> b.id_lugar_profesion
+and a.fecha_insert = b.fecha_insert
+and a.fecha_modificacion = b.fecha_modificacion
+order by a.id_personaje asc;*/
+
+select * from personajes a
+where exists (select * from tmp_personajes b -- or where not exists
+where a.id_personaje = b.id_personaje
+and a.desc_personaje = b.desc_personaje
+and a.id_familia <=> b.id_familia
+and a.id_sexo = b.id_sexo
+and a.id_matrimonio <=> b.id_matrimonio
+and a.id_lugar_residencia <=> b.id_lugar_residencia
+and a.id_profesion <=> b.id_profesion
+and a.id_lugar_profesion <=> b.id_lugar_profesion
+and a.fecha_insert = b.fecha_insert
+and a.fecha_modificacion = b.fecha_modificacion)
+order by a.id_personaje asc;
 
 
