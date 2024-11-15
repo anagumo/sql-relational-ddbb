@@ -132,3 +132,5 @@ select distinct per.desc_personaje, mas.desc_mascota
 from personajes per
 inner join familias fam on per.id_familia = fam.id_familia
 inner join mascotas mas on fam.id_familia = mas.id_familia;
+
+SHOW VARIABLES LIKE 'local_infile';
